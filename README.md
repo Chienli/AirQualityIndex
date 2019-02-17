@@ -1,2 +1,0 @@
-# aqiProject
-Created with CodeSandbox
