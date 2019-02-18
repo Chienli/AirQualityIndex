@@ -66,35 +66,35 @@ td {
   border-collapse: collapse;
   background: #ffffff;
 }
-.standardTable > tr > th {
+.standardTable > thead > tr > th {
   width: 121.67px;
   height: 54px;
 }
-.standardTable > tr > td {
+.standardTable > tbody > tr > td {
   width: 121.67px;
   height: 56px;
 }
-.standardTable > tr > td > div {
+.standardTable > tbody > tr > td > div {
   width: 80px;
   line-height: 24px;
   margin: 0 auto 0 auto;
 }
-.standardTable > tr > th:nth-child(1) {
+.standardTable > thead > tr > th:nth-child(1) {
   background: #95f084;
 }
-.standardTable > tr > th:nth-child(2) {
+.standardTable > thead > tr > th:nth-child(2) {
   background: #ffe695;
 }
-.standardTable > tr > th:nth-child(3) {
+.standardTable > thead > tr > th:nth-child(3) {
   background: #ffaf6a;
 }
-.standardTable > tr > th:nth-child(4) {
+.standardTable > thead > tr > th:nth-child(4) {
   background: #ff5757;
 }
-.standardTable > tr > th:nth-child(5) {
+.standardTable > thead > tr > th:nth-child(5) {
   background: #9777ff;
 }
-.standardTable > tr > th:nth-child(6) {
+.standardTable > thead > tr > th:nth-child(6) {
   background: #ad1774;
 }
 .titleBox {
@@ -239,6 +239,7 @@ td {
   overflow-y: scroll;
 }
 .case {
+  cursor: pointer;
   background: #ffffff;
   display: flex;
   width: 350px;
