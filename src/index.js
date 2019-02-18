@@ -10,11 +10,11 @@ class App extends React.Component {
       data: {},
       isLoading: true,
       cityName: "高雄市",
-      publish: "1997-01-09 08:00",
       casedata: {
-        aqi: [],
-        status: [],
-        siteName: [],
+        aqi: [156],
+        status: ["對所有族群不健康"],
+        siteName: ["前金"],
+        publishTime: "1970-01-01 00:00",
         cityBeChoosed: ""
       },
       statusData: {
@@ -38,23 +38,11 @@ class App extends React.Component {
     )
       .then(res => res.json())
       .then(json => {
-        // const tmpJson = json.slice(0, 5);
         const data = json.reduce((acc, record) => {
-          // console.log("original acc", JSON.stringify(acc));
           const county = record.County;
-          // console.log("county", county);
           const groupedRecords = acc[county] || [];
-          // console.log(
-          //   "original groupedRecords",
-          //   JSON.stringify(groupedRecords)
-          // );
           groupedRecords.push(record);
-          // console.log(
-          //   "modified groupedRecords",
-          //   JSON.stringify(groupedRecords)
-          // );
           acc[county] = groupedRecords;
-          // console.log("modified acc", JSON.stringify(acc));
           return acc;
         }, {});
         this.setState({
@@ -70,19 +58,15 @@ class App extends React.Component {
     });
     const data = this.state.data;
     const cityBeChoosed = data[e.target.value];
-    const siteName = cityBeChoosed.map(value => value.SiteName);
-    const aqi = cityBeChoosed.map(value => value.AQI);
-    const status = cityBeChoosed.map(value => value.Status);
-    const publishTime = cityBeChoosed[0].PublishTime;
     const caseData = {
-      aqi: aqi,
-      status: status,
-      siteName: siteName,
+      aqi: cityBeChoosed.map(value => value.AQI),
+      status: cityBeChoosed.map(value => value.Status),
+      siteName: cityBeChoosed.map(value => value.SiteName),
+      publishTime: cityBeChoosed[0].PublishTime,
       cityBeChoosed: cityBeChoosed
     };
 
     this.setState({
-      publish: publishTime,
       casedata: caseData
     });
   }
@@ -112,7 +96,10 @@ class App extends React.Component {
             cityName={Object.keys(this.state.data)}
           />
           <StandardTable />
-          <City cityName={this.state.cityName} publish={this.state.publish} />
+          <City
+            cityName={this.state.cityName}
+            publish={this.state.casedata.publishTime}
+          />
           <Status
             statusData={this.state.statusData}
             caseData={this.state.casedata}
